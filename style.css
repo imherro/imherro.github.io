@@ -43,6 +43,7 @@ body {
     width: 120px;
     height: 178px;
     background-color: #0801b3;
+    color: white;
 }
 .box_right {
     float: right;
@@ -54,6 +55,7 @@ body {
     height: 510px;
     border-bottom: 20px solid #000;
     background-color: #fe0003;
+    color: white;
 }
 .box_bd {
     width: 420px;
@@ -79,5 +81,6 @@ body {
     width: 78px;
     height: 88px;
     background-color: #fffe03;
+    color: white;
 }
 
