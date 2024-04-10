@@ -1,46 +1,41 @@
-body, html {
-    height: 100%;
+body {
     margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 4fr 1fr;
-    height: 100%;
-    grid-gap: 10px;
-    padding: 10px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     background-color: #fff;
-  }
-  
-  .container > div {
-    padding: 20px;
-  }
-  
-  .header {
-    grid-column: 1 / 3;
-    background-color: #f2f2f2;
-  }
-  
-  .links a {
-    display: block;
-    margin-bottom: 10px;
-    text-decoration: none;
-    color: black;
-  }
-  
-  /* 蒙德里安风格背景 */
-  .container > div:nth-child(odd):not(.header) {
-    background-color: #ff0000; /* 红色 */
-  }
-  
-  .container > div:nth-child(even):not(.header) {
-    background-color: #0000ff; /* 蓝色 */
-  }
-  
-  .links {
-    background-color: #ffff00; /* 黄色 */
-  }
-  
-  
+}
+
+.mondrian {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    width: 60vmin;
+    height: 60vmin;
+    border: 5px solid #000;
+}
+
+.block {
+    border: 5px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.large { grid-area: 1 / 1 / 3 / 3; }
+.medium { grid-area: 3 / 1 / 5 / 3; }
+.small { grid-area: 1 / 3 / 2 / 4; }
+.tall { grid-area: 1 / 4 / 5 / 5; }
+.wide { grid-area: 2 / 3 / 3 / 4; }
+
+.yellow { background-color: #FFD700; }
+.blue { background-color: #1E90FF; }
+.red { background-color: #FF6347; }
+.white { background-color: #FFF; }
+
+.links {
+    position: absolute;
+    top: 
