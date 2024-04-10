@@ -1,0 +1,46 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    height: 100%;
+    grid-gap: 10px;
+    padding: 10px;
+    background-color: #fff;
+  }
+  
+  .container > div {
+    padding: 20px;
+  }
+  
+  .header {
+    grid-column: 1 / 3;
+    background-color: #f2f2f2;
+  }
+  
+  .links a {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  /* 蒙德里安风格背景 */
+  .container > div:nth-child(odd):not(.header) {
+    background-color: #ff0000; /* 红色 */
+  }
+  
+  .container > div:nth-child(even):not(.header) {
+    background-color: #0000ff; /* 蓝色 */
+  }
+  
+  .links {
+    background-color: #ffff00; /* 黄色 */
+  }
+  
+  
