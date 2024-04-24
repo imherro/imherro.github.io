@@ -8,6 +8,11 @@
 body {
     background-color: #ccc;
 }
+a, a:visited, a:hover, a:active {
+  color: black;  /* 设定链接颜色为黑色 */
+  text-decoration: none;  /* 去除下划线 */
+}
+
 .box1 {
     position: relative;
     width: 640px;
