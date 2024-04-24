@@ -6,9 +6,36 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://www.unpkg.com/mouse-firework@latest/dist/index.umd.js"></script>
 
+
+<script>
+function startFirework() {
+  firework({
+    excludeElements: ["a"],
+    particles: [
+      {
+        shape: "circle",
+        move: "emit",
+        easing: "easeOutExpo",
+        colors: [
+          "rgba(255,182,185,.9)",
+          "rgba(250,227,217,.9)",
+          "rgba(187,222,214,.9)",
+          "rgba(138,198,209,.9)",
+        ],
+        number: 30,
+        duration: [1200, 1800],
+        shapeOptions: {
+          radius: [16, 32],
+        },
+      },
+    ],
+  });
+}
+</script>
+
 </head>
 <body onclick="startFirework()">
-    
+    <button onclick="startFirework()">点击这里看效果</button>
     <div class="box1">
         <div class="box2">
             <!-- 左边部分 -->
