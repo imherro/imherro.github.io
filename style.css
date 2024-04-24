@@ -8,10 +8,7 @@
 body {
     background-color: #ccc;
 }
-a, a:visited, a:hover, a:active {
-  color: black;  /* 设定链接颜色为黑色 */
-  text-decoration: none;  /* 去除下划线 */
-}
+
 
 .box1 {
     position: relative;
@@ -49,6 +46,10 @@ a, a:visited, a:hover, a:active {
     height: 178px;
     background-color: #0801b3;
     color: white;
+    a, a:visited, a:hover, a:active {
+      color: white;  /* 设定链接颜色为黑色 */
+      text-decoration: none;  /* 去除下划线 */
+    }    
 }
 .box_right {
     float: right;
@@ -61,6 +62,10 @@ a, a:visited, a:hover, a:active {
     border-bottom: 20px solid #000;
     background-color: #fe0003;
     color: white;
+    a, a:visited, a:hover, a:active {
+      color: white;  /* 设定链接颜色为黑色 */
+      text-decoration: none;  /* 去除下划线 */
+    }
 }
 .box_bd {
     width: 420px;
@@ -87,5 +92,9 @@ a, a:visited, a:hover, a:active {
     height: 88px;
     background-color: #fffe03;
     color: white;
+    a, a:visited, a:hover, a:active {
+      color: black;  /* 设定链接颜色为黑色 */
+      text-decoration: none;  /* 去除下划线 */
+    }
 }
 
