@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Number Label</title>
+<script>
+function updateLabel() {
+    // 获取输入框的值并将其转换为数字
+    var inputVal = document.getElementById('numberInput').value;
+    var number = parseFloat(inputVal);
+
+    // 检查输入是否为数字，如果不是，则返回
+    if (isNaN(number)) {
+        document.getElementById('resultLabel').textContent = '请输入一个有效的数字';
+        return;
+    }
+
+    // 更新label的文本为输入的数字
+    document.getElementById('resultLabel').textContent = number;
+}
+</script>
+</head>
+<body>
+
+<label for="numberInput">请输入一个数字：</label>
+<input type="text" id="numberInput" oninput="updateLabel()" placeholder="输入数字">
+
+<p>显示的数字是：<span id="resultLabel"></span></p>
+
+</body>
+</html>

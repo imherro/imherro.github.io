@@ -65,7 +65,7 @@
         }
 
         .grid-item h2 {
-            margin: 30;
+            margin: 0;
             font-size: 25px;
             /* 移除标题的默认外边距 */
 
@@ -87,6 +87,14 @@
             text-align: left;
             padding: 10px;
         }
+
+        .transparent-input {
+            font-size: 30px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color:white;
+        }
     </style>
 
 </head>
@@ -98,7 +106,7 @@
                 <p>
                     </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <img src="images/logo.jpg" alt="Logo" />
-                <h1>中央美术学院</h1>
+                <h1>山东财经大学艺术学院</h1>
 
             </div>
 
@@ -154,7 +162,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <h3>RMB：<label id="numberDiv-RMB">0</label></h3>
+                            <h3>RMB：<input type="text" id="numberDiv-RMB" oninput="updateRMB()" class="transparent-input"></h3>
                         </td>
                     </tr>
                     <tr>
@@ -178,6 +186,47 @@
     </div>
 </body>
 <script>
+    function auction258(number) {
+        // 将数字转换为字符串
+        const strNumber = String(number);
+        if (number >= 0 && number < 1000) {
+            if (number == 0) { return 20; }
+            if (number == 20) { return 30; }
+            if (number == 50) { return 30; }
+            if (number == 80) { return 20; }
+            if (strNumber.length >= 3 && strNumber.endsWith('00')) { return 20; }
+            if (strNumber.length >= 3 && strNumber.endsWith('20')) { return 30; }
+            if (strNumber.length >= 3 && strNumber.endsWith('50')) { return 30; }
+            if (strNumber.length >= 3 && strNumber.endsWith('80')) { return 20; }
+        }
+        if (number >= 1000 && number < 10000) {
+            if (number == 1000) { return 200; }
+            if (strNumber.length >= 4 && strNumber.endsWith('000')) { return 200; }
+            if (strNumber.length >= 4 && strNumber.endsWith('200')) { return 300; }
+            if (strNumber.length >= 4 && strNumber.endsWith('500')) { return 300; }
+            if (strNumber.length >= 4 && strNumber.endsWith('800')) { return 200; }
+        }
+        if (number >= 10000 && number < 100000) {
+            if (number == 10000) { return 2000; }
+            if (strNumber.length >= 4 && strNumber.endsWith('0000')) { return 2000; }
+            if (strNumber.length >= 4 && strNumber.endsWith('2000')) { return 3000; }
+            if (strNumber.length >= 4 && strNumber.endsWith('5000')) { return 3000; }
+            if (strNumber.length >= 4 && strNumber.endsWith('8000')) { return 2000; }
+        }
+
+        if (number >= 100000 && number < 1000000) {
+            if (number == 100000) { return 20000; }
+            if (strNumber.length >= 4 && strNumber.endsWith('00000')) { return 20000; }
+            if (strNumber.length >= 4 && strNumber.endsWith('20000')) { return 30000; }
+            if (strNumber.length >= 4 && strNumber.endsWith('50000')) { return 30000; }
+            if (strNumber.length >= 4 && strNumber.endsWith('80000')) { return 20000; }
+        }
+
+
+        return 100;
+    }
+
+
     // 获取div元素
     var numberDivRMB = document.getElementById('numberDiv-RMB');
     var numberDivHKD = document.getElementById('numberDiv-HKD');
@@ -203,7 +252,20 @@
 
     var currentImageIndex = -1; // 当前图片的索引
 
+    function updateRMB() {
+        var currentNumberRMB = parseInt(numberDivRMB.value, 10);
 
+        // 检查转换后的数字是否为有效数字
+        if (!isNaN(currentNumberRMB)) {
+            // 更新div的内容
+            numberDivRMB.value = currentNumberRMB;
+            prices[currentImageIndex] = currentNumberRMB;
+            numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+            numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+            numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+        }
+
+    }
     // 监听键盘事件
     document.addEventListener('keydown', function (event) {
         switch (event.key) {
@@ -211,37 +273,23 @@
                 if (currentImageIndex == -1) break;
                 // 处理上箭头键的逻辑
                 // 读取当前div的内容，并转换为数字
-                var currentNumberRMB = parseInt(numberDivRMB.textContent, 10);
+                var currentNumberRMB = parseInt(numberDivRMB.value, 10);
 
                 // 检查转换后的数字是否为有效数字
                 if (!isNaN(currentNumberRMB)) {
                     // 增加100
-                    currentNumberRMB += 100;
+                    currentNumberRMB += auction258(currentNumberRMB);
 
                     // 更新div的内容
-                    numberDivRMB.textContent = currentNumberRMB;
+                    numberDivRMB.value = currentNumberRMB;
+                    prices[currentImageIndex] = currentNumberRMB;
                     numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
                     numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
                     numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
                 }
                 break;
             case 'ArrowDown':
-                if (currentImageIndex == -1) break;
-                // 处理下箭头键的逻辑
-                // 读取当前div的内容，并转换为数字
-                var currentNumberRMB = parseInt(numberDivRMB.textContent, 10);
-
-                // 检查转换后的数字是否为有效数字
-                if (!isNaN(currentNumberRMB)) {
-                    // 增加100
-                    currentNumberRMB -= 100;
-
-                    // 更新div的内容
-                    numberDivRMB.textContent = currentNumberRMB;
-                    numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
-                    numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
-                    numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
-                }
+  
                 break;
             case 'ArrowLeft':
                 // 处理左箭头键的逻辑
@@ -253,11 +301,12 @@
                 currentauthor.textContent = authors[currentImageIndex];
                 currenttype.textContent = types[currentImageIndex];
                 currentsize.textContent = sizes[currentImageIndex];
-                numberDivRMB.textContent = prices[currentImageIndex];
+                numberDivRMB.value = prices[currentImageIndex];
 
-                var currentNumberRMB = parseInt(numberDivRMB.textContent, 10);
+                var currentNumberRMB = parseInt(numberDivRMB.value, 10);
                 // 更新div的内容
-                numberDivRMB.textContent = currentNumberRMB;
+                numberDivRMB.value = currentNumberRMB;
+                prices[currentImageIndex] = currentNumberRMB;
                 numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
                 numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
                 numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
@@ -274,11 +323,12 @@
                 currentauthor.textContent = authors[currentImageIndex];
                 currenttype.textContent = types[currentImageIndex];
                 currentsize.textContent = sizes[currentImageIndex];
-                numberDivRMB.textContent = prices[currentImageIndex];
+                numberDivRMB.value = prices[currentImageIndex];
 
-                var currentNumberRMB = parseInt(numberDivRMB.textContent, 10);
+                var currentNumberRMB = parseInt(numberDivRMB.value, 10);
                 // 更新div的内容
-                numberDivRMB.textContent = currentNumberRMB;
+                numberDivRMB.value = currentNumberRMB;
+                prices[currentImageIndex] = currentNumberRMB;
                 numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
                 numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
                 numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
