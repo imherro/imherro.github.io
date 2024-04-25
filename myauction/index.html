@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>拍卖会</title>
+    <title>拍卖会</title> <!--可以修改-->
     <style>
         body {
             font-family: "Microsoft YaHei", Arial, sans-serif;
@@ -93,7 +93,7 @@
             background-color: transparent;
             border: none;
             outline: none;
-            color:white;
+            color: white;
         }
     </style>
 
@@ -105,15 +105,15 @@
             <div class="logo-item">
                 <p>
                     </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src="images/logo.jpg" alt="Logo" />
-                <h1>山东财经大学艺术学院</h1>
+                    <img src="images/logo.jpg" alt="Logo" /><!--可以修改-->
+                <h1>山东财经大学艺术学院</h1><!--可以修改-->
 
             </div>
 
         </div>
         <div class="grid-item">
-            <h2>2024年4月27日 星期六 14:30:21</h2>
-            <h2>震古烁今-2024年艺术品竞拍会</h2>
+            <h2><div id="clock"></div></h2>
+            <h2>震古烁今-2024年艺术品竞拍会</h2><!--可以修改-->
 
         </div>
 
@@ -162,7 +162,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <h3>RMB：<input type="text" id="numberDiv-RMB" oninput="updateRMB()" class="transparent-input"></h3>
+                            <h3>RMB：<input type="text" id="numberDiv-RMB" oninput="updateRMB()"
+                                    class="transparent-input"></h3>
                         </td>
                     </tr>
                     <tr>
@@ -289,7 +290,7 @@
                 }
                 break;
             case 'ArrowDown':
-  
+
                 break;
             case 'ArrowLeft':
                 // 处理左箭头键的逻辑
@@ -335,7 +336,51 @@
                 break;
         }
     });
+    window.addEventListener('beforeunload', function (e) {
+        // 取消默认的确认对话框
+        (e || window.event).returnValue = false;
 
+        // 你可以在这里执行一些操作，比如保存草稿或提醒用户
+        // 例如，保存草稿到本地存储
+        localStorage.setItem('draft', '这里是草稿内容');
+
+        // Chrome 37+ 需要一个字符串来触发一个确认对话框
+        return "您有未保存的更改，确定要离开吗？";
+    });
+    function updateTime() {
+        var now = new Date(); // 创建一个Date对象，表示当前时间
+        var year = now.getFullYear(); // 获取年份
+        var month = now.getMonth() + 1; // 获取月份，getMonth()返回的月份是从0开始的
+        var day = now.getDate(); // 获取日期
+        var dayOfWeek = now.getDay(); // 获取星期几，0是星期天
+        var hours = now.getHours(); // 获取小时
+        var minutes = now.getMinutes(); // 获取分钟
+        var seconds = now.getSeconds(); // 获取秒
+
+        // 星期几的数组
+        var daysOfWeek = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
+        // 将小时转换为12小时制，并添加上午或下午的前缀
+        var amPm = hours >= 12 ? '下午' : '上午';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // 将0小时转换为12小时
+
+        // 将分钟和秒数格式化为两位数
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        // 将时间组件组合成字符串
+        var timeString = year + "年" + month + "月" + day + "日 " + daysOfWeek[dayOfWeek] + " " + amPm + " " + hours + ":" + minutes + ":" + seconds;
+
+        // 将时间字符串设置到页面的某个元素中
+        document.getElementById('clock').textContent = timeString;
+    }
+
+    // 第一次调用updateTime来初始化时间显示
+    updateTime();
+
+    // 每1000毫秒（1秒）调用一次updateTime来更新时间
+    setInterval(updateTime, 1000);
 </script>
 
 </html>
