@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拍卖会</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #9A9696;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+
+            grid-template-rows: auto;
+            /* 行高根据内容自动调整 */
+            gap: 0px;
+            /* 网格项之间的间隙 */
+        }
+
+        .grid-item {
+            /* 可以为网格项添加一些样式，比如背景颜色 */
+            background-color: #9A9696;
+            color: white;
+            padding: 0px;
+            text-align: center;
+            justify-content: flex-end;
+            /* 垂直对齐底部 */
+        }
+
+        .grid-item img {
+            height: 500px;
+            /* 设置图片高度 */
+            width: auto;
+            /* 设置图片宽度 */
+            padding: 30px;
+        }
+
+        .logo-item {
+            display: flex;
+            /* 使用Flexbox布局 */
+            align-items: center;
+            /* 确保子元素在交叉轴上居中对齐 */
+            gap: 10px;
+            /* 图片和标题之间的间距 */
+        }
+
+        .logo-item img {
+            height: 100px;
+            /* 设置图片高度 */
+            width: 100px;
+            /* 设置图片宽度 */
+        }
+
+        .grid-item h1 {
+            margin: 0;
+            font-size: 60px;
+            /* 移除标题的默认外边距 */
+
+        }
+
+        .grid-item h2 {
+            margin: 30;
+            font-size: 25px;
+            /* 移除标题的默认外边距 */
+
+        }
+
+        .grid-item h3 {
+            margin: 0;
+            font-size: 20px;
+            /* 移除标题的默认外边距 */
+
+        }
+
+        table {
+            text-align: left;
+            padding: 30px;
+        }
+
+        table td {
+            text-align: left;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="grid-item">
+            <div class="logo-item">
+                <p>
+                    </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="images/logo.jpg" alt="Logo" />
+                <h1>中央美术学院</h1>
+
+            </div>
+
+        </div>
+        <div class="grid-item">
+            <h2>2024年4月27日 星期六 14:30:21</h2>
+            <h2>震古烁今-2024年艺术品竞拍会</h2>
+
+        </div>
+
+        <div class="grid-item">
+            <hr>
+        </div>
+        <div class="grid-item">
+            <hr>
+            <p>
+        </div>
+        <div class="grid-item">
+            <img id="currentImage" src="images/0.gif" alt="pic" />
+        </div>
+        <div class="grid-item">
+            <div>
+                <table border="0">
+                    <tr>
+                        <td>
+                            <h3><label id="currentTitle">0</label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3><label id="currentName">0</label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>作者：<label id="currentAuthor">0</label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>材质：<label id="currentType">0</label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>尺寸：<label id="currentSize">0</label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>RMB：<label id="numberDiv-RMB">0</label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>HKD：<label id="numberDiv-HKD">0</label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>USD：<label id="numberDiv-USD">0</label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>EUR：<label id="numberDiv-EUR">0</label></h3>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 获取div元素
+    var numberDivRMB = document.getElementById('numberDiv-RMB');
+    var numberDivHKD = document.getElementById('numberDiv-HKD');
+    var numberDivUSD = document.getElementById('numberDiv-USD');
+    var numberDivEUR = document.getElementById('numberDiv-EUR');
+    // 获取当前图片的DOM元素
+    var currentImage = document.getElementById('currentImage');
+    var currenttitle = document.getElementById('currentTitle');
+    var currentname = document.getElementById('currentName');
+    var currentauthor = document.getElementById('currentAuthor');
+    var currenttype = document.getElementById('currentType');
+    var currentsize = document.getElementById('currentSize');
+    var currentprice = document.getElementById('currentPrice');
+
+    // 定义一个数组来存储路径
+    var images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg'];
+    var titles = ['LOT 001', 'LOT 002', 'LOT 003'];
+    var names = ['济南山水', '花花草草', '地球村'];
+    var authors = ['徐悲鸿', '周玮佳', '达芬奇'];
+    var types = ['纸本水墨', '综合', '油画'];
+    var sizes = ['一米', '一纳米', '一光年'];
+    var prices = ['300', '50000', '50'];
+
+    var currentImageIndex = -1; // 当前图片的索引
+
+
+    // 监听键盘事件
+    document.addEventListener('keydown', function (event) {
+        switch (event.key) {
+            case 'ArrowUp':
+                if (currentImageIndex == -1) break;
+                // 处理上箭头键的逻辑
+                // 读取当前div的内容，并转换为数字
+                var currentNumberRMB = parseInt(numberDivRMB.textContent, 10);
+
+                // 检查转换后的数字是否为有效数字
+                if (!isNaN(currentNumberRMB)) {
+                    // 增加100
+                    currentNumberRMB += 100;
+
+                    // 更新div的内容
+                    numberDivRMB.textContent = currentNumberRMB;
+                    numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+                    numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+                    numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+                }
+                break;
+            case 'ArrowDown':
+                if (currentImageIndex == -1) break;
+                // 处理下箭头键的逻辑
+                // 读取当前div的内容，并转换为数字
+                var currentNumberRMB = parseInt(numberDivRMB.textContent, 10);
+
+                // 检查转换后的数字是否为有效数字
+                if (!isNaN(currentNumberRMB)) {
+                    // 增加100
+                    currentNumberRMB -= 100;
+
+                    // 更新div的内容
+                    numberDivRMB.textContent = currentNumberRMB;
+                    numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+                    numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+                    numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+                }
+                break;
+            case 'ArrowLeft':
+                // 处理左箭头键的逻辑
+                // 切换到上一张图片
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                currentImage.src = images[currentImageIndex];
+                currenttitle.textContent = titles[currentImageIndex];
+                currentname.textContent = names[currentImageIndex];
+                currentauthor.textContent = authors[currentImageIndex];
+                currenttype.textContent = types[currentImageIndex];
+                currentsize.textContent = sizes[currentImageIndex];
+                numberDivRMB.textContent = prices[currentImageIndex];
+
+                var currentNumberRMB = parseInt(numberDivRMB.textContent, 10);
+                // 更新div的内容
+                numberDivRMB.textContent = currentNumberRMB;
+                numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+                numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+                numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+
+
+                break;
+            case 'ArrowRight':
+                // 处理右箭头键的逻辑
+                // 切换到上一张图片
+                currentImageIndex = (currentImageIndex + 1 + images.length) % images.length;
+                currentImage.src = images[currentImageIndex];
+                currenttitle.textContent = titles[currentImageIndex];
+                currentname.textContent = names[currentImageIndex];
+                currentauthor.textContent = authors[currentImageIndex];
+                currenttype.textContent = types[currentImageIndex];
+                currentsize.textContent = sizes[currentImageIndex];
+                numberDivRMB.textContent = prices[currentImageIndex];
+
+                var currentNumberRMB = parseInt(numberDivRMB.textContent, 10);
+                // 更新div的内容
+                numberDivRMB.textContent = currentNumberRMB;
+                numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+                numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+                numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+                break;
+        }
+    });
+
+</script>
+
+</html>
