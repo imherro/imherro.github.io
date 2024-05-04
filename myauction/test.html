@@ -1,32 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Input Number Label</title>
-<script>
-function updateLabel() {
-    // 获取输入框的值并将其转换为数字
-    var inputVal = document.getElementById('numberInput').value;
-    var number = parseFloat(inputVal);
-
-    // 检查输入是否为数字，如果不是，则返回
-    if (isNaN(number)) {
-        document.getElementById('resultLabel').textContent = '请输入一个有效的数字';
-        return;
-    }
-
-    // 更新label的文本为输入的数字
-    document.getElementById('resultLabel').textContent = number;
-}
-</script>
+    <meta charset="UTF-8">
+    <title>艺术品报表</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 
-<label for="numberInput">请输入一个数字：</label>
-<input type="text" id="numberInput" oninput="updateLabel()" placeholder="输入数字">
 
-<p>显示的数字是：<span id="resultLabel"></span></p>
+    <script>
+        // 你的数据变量
+        var images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg'];
+        var titles = ['LOT 001', 'LOT 002', 'LOT 003'];
+        var names = ['济南山水', '花花草草', '地球村'];
+        var authors = ['徐悲鸿', '周玮佳', '达芬奇'];
+        var types = ['纸本水墨', '综合', '油画'];
+        var sizes = ['一米', '一纳米', '一光年'];
+        var prices = ['300', '50000', '50'];
+
+        // 动态生成表格行的函数
+        function generateTable() {
+            var tableBody = document.getElementById('artworkTable').querySelector('tbody');
+            // 清除现有行
+            tableBody.innerHTML = "";
+
+            // 遍历数据并生成表格行
+            images.forEach(function(image, index) {
+                var row = `<tr>
+                    <td><img src="${image}" alt="${names[index]}" class="table-image"></td>
+                    <td>${titles[index]}</td>
+                    <td>${names[index]}</td>
+                    <td>${authors[index]}</td>
+                    <td>${types[index]}</td>
+                    <td>${sizes[index]}</td>
+                    <td>${prices[index]}</td>
+                </tr>`;
+                tableBody.innerHTML += row; // 将新行添加到表格主体
+            });
+        }
+
+        // 页面加载完成后生成表格
+        document.addEventListener('DOMContentLoaded', generateTable);
+    </script>
 
 </body>
 </html>

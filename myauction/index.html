@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>拍卖会</title> <!--可以修改-->
+    <title>山东财经大学艺术品拍卖会</title> <!--可以修改-->
     <style>
         body {
             font-family: "Microsoft YaHei", Arial, sans-serif;
@@ -34,7 +34,7 @@
         }
 
         .grid-item img {
-            height: 500px;
+            height: 400px;
             /* 设置图片高度 */
             width: auto;
             /* 设置图片宽度 */
@@ -79,22 +79,47 @@
 
         }
 
+        .grid-item h4 {
+            margin: 0;
+            font-size: 30px;
+            /* 移除标题的默认外边距 */
+
+        }
+
+        .grid-item h5 {
+            margin: 0;
+            font-size: 20px;
+            /* 移除标题的默认外边距 */
+            font-family: "Courier New", Courier, monospace;
+
+        }
+
         table {
             text-align: left;
-            padding: 30px;
+            padding: 20px;
         }
 
         table td {
             text-align: left;
-            padding: 10px;
+            padding: 5px;
         }
 
         .transparent-input {
+            width: 200px;
             font-size: 30px;
             background-color: transparent;
             border: none;
             outline: none;
             color: white;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        #reportDiv {
+            display: none;
+            background-color: #f0f0f0;
+            margin: 10px;
         }
     </style>
 
@@ -104,15 +129,17 @@
     <div class="grid-container">
         <div class="grid-item">
             <div class="logo-item">
-       
-                    <img src="images/logo.jpg" alt="Logo" /><!--可以修改-->
+
+                <img src="images/logo.jpg" alt="Logo" /><!--可以修改-->
                 <h1>山东财经大学艺术学院</h1><!--可以修改-->
 
             </div>
 
         </div>
         <div class="grid-item"><br>
-            <h2><div id="clock"></div></h2>
+            <h2>
+                <div id="clock"></div>
+            </h2>
             <h2>震古烁今-2024年艺术品竞拍会</h2><!--可以修改-->
 
         </div>
@@ -132,27 +159,27 @@
                 <table border="0">
                     <tr>
                         <td>
-                            <h3><label id="currentTitle">……</label></h3>
+                            <h4><label id="currentTitle">LOT </label></h4>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h3><label id="currentName">……</label></h3>
+                            <h4><label id="currentName">名称 </label></h4>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h3>作者：<label id="currentAuthor">……</label></h3>
+                            <h3>作者：<label id="currentAuthor"> </label></h3>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h3>材质：<label id="currentType">……</label></h3>
+                            <h3>材质：<label id="currentType"> </label></h3>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h3>尺寸：<label id="currentSize">……</label></h3>
+                            <h3>尺寸：<label id="currentSize"> </label></h3>
                         </td>
                     </tr>
                     <tr>
@@ -162,28 +189,48 @@
                     </tr>
                     <tr>
                         <td>
-                            <h3>RMB：<input type="text" id="numberDiv-RMB" oninput="updateRMB()"
-                                    class="transparent-input"></h3>
+                            <h5>RMB：<input type="text" id="numberDiv-RMB" oninput="updateRMB()"
+                                    class="transparent-input"> </h5>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h3>HKD：<label id="numberDiv-HKD">0</label></h3>
+                            <h5>HKD： <label id="numberDiv-HKD"> </label></h5>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h3>USD：<label id="numberDiv-USD">0</label></h3>
+                            <h5>USD： <label id="numberDiv-USD"> </label></h5>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h3>EUR：<label id="numberDiv-EUR">0</label></h3>
+                            <h5>EUR： <label id="numberDiv-EUR"> </label></h5>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
+    </div>
+
+    <div id="reportDiv">
+
+        <table id="artworkTable" width="80%" >
+            <thead>
+                <tr>
+                    <th>LOT编号</th>
+                    <th>名称</th>
+                    <th>作者</th>
+                    <th>类型</th>
+                    <th>尺寸</th>
+                    <th>价格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 表格行将通过JavaScript动态生成 -->
+            </tbody>
+        </table>
+
     </div>
 </body>
 <script>
@@ -252,6 +299,7 @@
     var prices = ['300', '50000', '50'];
 
     var currentImageIndex = -1; // 当前图片的索引
+
 
     function updateRMB() {
         var currentNumberRMB = parseInt(numberDivRMB.value, 10);
@@ -334,6 +382,18 @@
                 numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
                 numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
                 break;
+            case 'End':
+                // 切换div的显示状态
+                // 获取div元素
+                var toggleDiv = document.getElementById('reportDiv');
+                var isVisible = false; // 用于追踪div的显示状态
+                generateTable() ;
+                if (toggleDiv.style.display === 'none') {
+                    toggleDiv.style.display = 'block';
+                } else {
+                    toggleDiv.style.display = 'none';
+                }
+                break;
         }
     });
     window.addEventListener('beforeunload', function (e) {
@@ -381,6 +441,31 @@
 
     // 每1000毫秒（1秒）调用一次updateTime来更新时间
     setInterval(updateTime, 1000);
+
+    // 动态生成表格行的函数
+    function generateTable() {
+        var tableBody = document.getElementById('artworkTable').querySelector('tbody');
+        // 清除现有行
+        tableBody.innerHTML = "";
+
+        // 遍历数据并生成表格行
+        images.forEach(function (image, index) {
+            var row = `<tr>
+                    
+                    <td>${titles[index]}</td>
+                    <td>${names[index]}</td>
+                    <td>${authors[index]}</td>
+                    <td>${types[index]}</td>
+                    <td>${sizes[index]}</td>
+                    <td>${prices[index]}</td>
+                </tr>`;
+            tableBody.innerHTML += row; // 将新行添加到表格主体
+        });
+    }
+
+    // 页面加载完成后生成表格
+    document.addEventListener('DOMContentLoaded', generateTable);
+
 </script>
 
 </html>
