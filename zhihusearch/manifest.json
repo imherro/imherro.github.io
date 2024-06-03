@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "知乎搜索",
+    "version": "1.0",
+    "description": "在右键菜单中添加知乎搜索选项",
+    "permissions": ["contextMenus"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  }
