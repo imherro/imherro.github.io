@@ -6,262 +6,65 @@
 <title>🧭 我的导航</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-  background: #f0f2f5;
-  color: #333;
-  padding: 24px;
-  min-height: 100vh;
-}
-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-header h1 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 8px;
-}
-header p {
-  font-size: 14px;
-  color: #888;
-}
-.search-box {
-  max-width: 500px;
-  margin: 16px auto 0;
-  position: relative;
-}
-.search-box input {
-  width: 100%;
-  padding: 12px 20px 12px 44px;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  font-size: 15px;
-  outline: none;
-  transition: border-color .2s;
-  background: #fff;
-}
+body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f0f2f5; color: #333; padding: 24px; min-height: 100vh; }
+header { text-align: center; margin-bottom: 32px; }
+header h1 { font-size: 28px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+header p { font-size: 14px; color: #888; }
+.search-box { max-width: 500px; margin: 16px auto 0; position: relative; }
+.search-box input { width: 100%; padding: 12px 20px 12px 44px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 15px; outline: none; transition: border-color .2s; background: #fff; }
 .search-box input:focus { border-color: #4a90d9; }
-.search-box::before {
-  content: "🔍";
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-}
-.category {
-  margin-bottom: 28px;
-}
-.category h2 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #555;
-  margin-bottom: 12px;
-  padding-left: 8px;
-  border-left: 3px solid #4a90d9;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px;
-}
+.search-box::before { content: "🔍"; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 18px; }
+.category { margin-bottom: 28px; }
+.category h2 { font-size: 16px; font-weight: 600; color: #555; margin-bottom: 12px; padding-left: 8px; border-left: 3px solid #4a90d9; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
 .card-wrap { position: relative; }
-.card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  background: #fff;
-  border-radius: 10px;
-  text-decoration: none;
-  color: #333;
-  transition: all .2s;
-  border: 1px solid #eee;
-}
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,.08);
-  border-color: #4a90d9;
-}
-.card .icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-  background: #f5f7fa;
-}
+.card { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border-radius: 10px; text-decoration: none; color: #333; transition: all .2s; border: 1px solid #eee; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.08); border-color: #4a90d9; }
+.card .icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; background: #f5f7fa; }
 .card .info { overflow: hidden; }
-.card .name {
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.card .desc {
-  font-size: 11px;
-  color: #999;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.add-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 16px;
-  background: #fafafa;
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #aaa;
-  font-size: 14px;
-  transition: all .2s;
-}
-.add-btn:hover {
-  border-color: #4a90d9;
-  color: #4a90d9;
-  background: #f0f6ff;
-}
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.4);
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-}
+.card .name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card .desc { font-size: 11px; color: #999; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.add-btn { display: flex; align-items: center; justify-content: center; padding: 14px 16px; background: #fafafa; border: 2px dashed #ccc; border-radius: 10px; cursor: pointer; color: #aaa; font-size: 14px; transition: all .2s; }
+.add-btn:hover { border-color: #4a90d9; color: #4a90d9; background: #f0f6ff; }
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 100; align-items: center; justify-content: center; }
 .modal-overlay.active { display: flex; }
-.modal {
-  background: #fff;
-  border-radius: 16px;
-  padding: 28px;
-  width: 400px;
-  max-width: 90vw;
-  box-shadow: 0 20px 60px rgba(0,0,0,.2);
-}
+.modal { background: #fff; border-radius: 16px; padding: 28px; width: 400px; max-width: 90vw; box-shadow: 0 20px 60px rgba(0,0,0,.2); }
 .modal h3 { margin-bottom: 20px; font-size: 18px; }
-.modal label {
-  display: block;
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 4px;
-  margin-top: 12px;
-}
-.modal input, .modal select {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  outline: none;
-}
+.modal label { display: block; font-size: 13px; color: #666; margin-bottom: 4px; margin-top: 12px; }
+.modal input, .modal select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
 .modal input:focus, .modal select:focus { border-color: #4a90d9; }
-.modal .btns {
-  display: flex;
-  gap: 10px;
-  margin-top: 24px;
-}
-.modal .btns button {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: 600;
-}
+.modal .btns { display: flex; gap: 10px; margin-top: 24px; }
+.modal .btns button { flex: 1; padding: 10px; border-radius: 8px; border: none; font-size: 14px; cursor: pointer; font-weight: 600; }
 .btn-primary { background: #4a90d9; color: #fff; }
 .btn-primary:hover { background: #357abd; }
 .btn-secondary { background: #f0f0f0; color: #666; }
 .btn-secondary:hover { background: #e0e0e0; }
-.del-btn {
-  display: none;
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #ff4d4f;
-  color: #fff;
-  border: none;
-  font-size: 12px;
-  cursor: pointer;
-  line-height: 20px;
-  text-align: center;
-}
+.del-btn { display: none; position: absolute; top: 4px; right: 4px; width: 20px; height: 20px; border-radius: 50%; background: #ff4d4f; color: #fff; border: none; font-size: 12px; cursor: pointer; line-height: 20px; text-align: center; }
 .card-wrap:hover .del-btn { display: block; }
 </style>
 </head>
 <body>
-
 <header>
   <h1>🧭 我的导航</h1>
-  <p>悬停卡片右上角 × 可删除 · 每个分类末尾可添加新网址</p>
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="搜索网站..." oninput="filterSites(this.value)">
-  </div>
+  <p>悬停右上角 × 可删除 · 每个分类末尾可添加</p>
+  <div class="search-box"><input type="text" id="searchInput" placeholder="搜索网站..." oninput="filterSites(this.value)"></div>
 </header>
-
 <div id="container"></div>
-
 <div class="modal-overlay" id="addModal">
   <div class="modal">
     <h3>➕ 添加网址</h3>
-    <label>网站名称</label>
-    <input id="inputName" placeholder="例：知乎">
-    <label>网址</label>
-    <input id="inputUrl" placeholder="例：https://www.zhihu.com">
-    <label>分类</label>
-    <select id="inputCategory"></select>
-    <label>图标（emoji，可选）</label>
-    <input id="inputIcon" placeholder="例：📖" maxlength="4">
+    <label>网站名称</label><input id="inputName" placeholder="例：知乎">
+    <label>网址</label><input id="inputUrl" placeholder="例：https://www.zhihu.com">
+    <label>分类</label><select id="inputCategory"></select>
+    <label>图标（emoji，可选）</label><input id="inputIcon" placeholder="例：📖" maxlength="4">
     <div class="btns">
       <button class="btn-secondary" onclick="closeModal()">取消</button>
       <button class="btn-primary" onclick="addSite()">添加</button>
     </div>
   </div>
 </div>
-
 <script>
-// ============================================================
-// 📌 在这里管理你的网址
-// 格式：{ name: "名称", url: "网址", icon: "emoji图标" }
-// 添加新分类：在 SITES 数组里加一个 { category: "分类名", items: [...] }
-// ============================================================
 const SITES = [
-  {
-    category: "📰 资讯",
-    items: [
-      { name: "东方财富", url: "https://www.eastmoney.com", icon: "💰" },
-      { name: "雪球", url: "https://xueqiu.com", icon: "❄️" },
-      { name: "财联社", url: "https://www.cls.cn", icon: "📡" },
-      { name: "36氪", url: "https://36kr.com", icon: "📰" },
-      { name: "澎湃新闻", url: "https://www.thepaper.cn", icon: "📝" },
-      { name: "知乎", url: "https://www.zhihu.com", icon: "📖" },
-      { name: "Hacker News", url: "https://news.ycombinator.com", icon: "🧑‍💻" },
-      { name: "科技文章", url: "https://www.bestblogs.dev/feeds?featured=y&time=all&language=all&sort=time_desc", icon: "📑" },
-    ]
-  },
-  {
-    category: "💹 金融",
-    items: [
-      { name: "同花顺", url: "https://www.10jqka.com.cn", icon: "📊" },
-      { name: "集思录", url: "https://www.jisilu.cn", icon: "🧮" },
-      { name: "巨潮资讯", url: "http://www.cninfo.com.cn", icon: "📋" },
-      { name: "英为财情", url: "https://cn.investing.com", icon: "🌍" },
-      { name: "TradingView", url: "https://www.tradingview.com", icon: "📈" },
-      { name: "天天基金", url: "https://fund.eastmoney.com", icon: "💹" },
-    ]
-  },
   {
     category: "🎵 音乐",
     items: [
@@ -288,23 +91,6 @@ const SITES = [
     ]
   },
   {
-    category: "🎬 影视",
-    items: [
-      { name: "爱壹帆", url: "https://www.iyf.lv/", icon: "🎬" },
-      { name: "xl720", url: "https://www.xl720.com/", icon: "🎥" },
-      { name: "4K蓝光", url: "http://www.4klg.top/", icon: "🔵" },
-      { name: "btnull", url: "https://www.btnull.org/", icon: "🎞️" },
-      { name: "4K时光", url: "https://www.4ksg.com/", icon: "⏱️" },
-      { name: "音范丝", url: "https://www.yinfans.me/", icon: "🎶" },
-      { name: "4K世界", url: "https://www.4ksj.com/", icon: "🌏" },
-      { name: "mini4k", url: "https://www.mini4k.org/", icon: "🔲" },
-      { name: "4KHDR", url: "https://4khdr.cn/", icon: "📺" },
-      { name: "47BT", url: "https://47bt.com/", icon: "🎞️" },
-      { name: "电影港", url: "https://www.dygangs.net/4K/", icon: "🎬" },
-      { name: "字幕库", url: "https://zimuku.org/", icon: "📝" },
-    ]
-  },
-  {
     category: "🎮 游戏",
     items: [
       { name: "上游世界", url: "https://www.gamer520.com/", icon: "🌍" },
@@ -314,177 +100,112 @@ const SITES = [
     ]
   },
   {
-    category: "🔍 搜索与资源",
+    category: "🛠️ 工具",
+    items: [
+      { name: "在线工具箱", url: "https://tool.liumingye.cn/", icon: "🧰" },
+      { name: "WeChatMsg", url: "https://github.com/LC044/WeChatMsg", icon: "💬" },
+      { name: "JustFree", url: "https://www.justfree.io/", icon: "🆓" },
+      { name: "itellyou", url: "https://msdn.itellyou.cn/", icon: "💿" },
+      { name: "Greasy Fork", url: "https://greasyfork.org/zh-CN", icon: "🐒" },
+    ]
+  },
+  {
+    category: "🎬 电影",
+    items: [
+      { name: "爱壹帆", url: "https://www.iyf.lv/", icon: "🎬" },
+      { name: "xl720", url: "https://www.xl720.com/", icon: "🎥" },
+      { name: "4K蓝光", url: "http://www.4klg.top/", icon: "🔵" },
+      { name: "5le", url: "http://www.5le.cc/", icon: "5️⃣" },
+      { name: "btnull", url: "https://www.btnull.org/", icon: "🎞️" },
+      { name: "4K时光", url: "https://www.4ksg.com/", icon: "⏱️" },
+      { name: "音范丝", url: "https://www.yinfans.me/", icon: "🎶" },
+      { name: "4K世界", url: "https://www.4ksj.com/", icon: "🌏" },
+      { name: "mini4k", url: "https://www.mini4k.org/", icon: "🔲" },
+      { name: "4KHDR", url: "https://4khdr.cn/", icon: "📺" },
+      { name: "47BT", url: "https://47bt.com/", icon: "🎞️" },
+      { name: "电影港", url: "https://www.dygangs.net/4K/", icon: "🎬" },
+      { name: "Rutor", url: "https://rutor.org/", icon: "🌐" },
+      { name: "Rutracker", url: "https://rutracker.org/", icon: "🌐" },
+      { name: "字幕库", url: "https://zimuku.org/", icon: "📝" },
+    ]
+  },
+  {
+    category: "📺 电视",
+    items: [
+      { name: "老网编公众号下载影视仓", url: "#", icon: "📺" },
+    ]
+  },
+  {
+    category: "🔍 搜索",
     items: [
       { name: "小爆虾", url: "https://xiaobaoxia.com/file.html", icon: "🦐" },
       { name: "老王磁力", url: "https://laowanggb.top/", icon: "🧲" },
       { name: "虫虫搜索", url: "https://search.chongbuluo.com/", icon: "🐛" },
       { name: "TorrentBay", url: "https://torrentbay.st/", icon: "🌊" },
       { name: "BT4G", url: "https://bt4gprx.com/", icon: "🔎" },
+      { name: "Ciliduo", url: "https://ciliduo.org/", icon: "🔍" },
+      { name: "云盘资源", url: "https://www.yunpanziyuan.xyz/", icon: "☁️" },
+      { name: "磁力管家", url: "https://wwp.lanzoul.com/b05mjysod", icon: "🧲" },
       { name: "磁力导航", url: "https://www.uucili.com/", icon: "🧭" },
       { name: "BTDig", url: "https://btdig.com/", icon: "⛏️" },
-      { name: "云盘资源", url: "https://www.yunpanziyuan.xyz/", icon: "☁️" },
-      { name: "Rutracker", url: "https://rutracker.org/", icon: "🌐" },
-      { name: "老司机", url: "https://www.giffox.com/", icon: "🚗" },
       { name: "qBittorrent", url: "https://www.qbittorrent.org/", icon: "⬇️" },
+      { name: "Trackers", url: "https://github.com/ngosang/trackerslist?tab=readme-ov-file", icon: "📋" },
+      { name: "老司机", url: "https://www.giffox.com/", icon: "🚗" },
+      { name: "搜图", url: "https://www.91sotu.com/", icon: "🖼️" },
+      { name: "小虎队", url: "https://www.bxhd.cn/", icon: "🐯" },
     ]
   },
   {
-    category: "🛠️ 工具",
+    category: "🤖 AI",
     items: [
-      { name: "在线工具箱", url: "https://tool.liumingye.cn/", icon: "🧰" },
-      { name: "ChatGPT", url: "https://chat.openai.com", icon: "🤖" },
-      { name: "Claude", url: "https://claude.ai", icon: "🧠" },
-      { name: "Google 翻译", url: "https://translate.google.com", icon: "🌐" },
-      { name: "DeepL", url: "https://www.deepl.com", icon: "🔄" },
-      { name: "WeChatMsg", url: "https://github.com/LC044/WeChatMsg", icon: "💬" },
-      { name: "JustFree", url: "https://www.justfree.io/", icon: "🆓" },
-      { name: "itellyou", url: "https://msdn.itellyou.cn/", icon: "💿" },
-      { name: "Greasy Fork", url: "https://greasyfork.org/zh-CN", icon: "🐒" },
-      { name: "TinyPNG", url: "https://tinypng.com", icon: "🐼" },
-    ]
-  },
-  {
-    category: "💻 开发",
-    items: [
-      { name: "GitHub", url: "https://github.com", icon: "🐙" },
-      { name: "Stack Overflow", url: "https://stackoverflow.com", icon: "📚" },
-      { name: "MDN", url: "https://developer.mozilla.org", icon: "🦊" },
-      { name: "PyPI", url: "https://pypi.org", icon: "🐍" },
-      { name: "Hugging Face", url: "https://huggingface.co", icon: "🤗" },
-    ]
-  },
-  {
-    category: "🎬 娱乐",
-    items: [
-      { name: "B站", url: "https://www.bilibili.com", icon: "📺" },
-      { name: "YouTube", url: "https://www.youtube.com", icon: "▶️" },
-      { name: "豆瓣", url: "https://www.douban.com", icon: "📗" },
-      { name: "京东", url: "https://www.jd.com", icon: "🛒" },
-      { name: "淘宝", url: "https://www.taobao.com", icon: "🛍️" },
-      { name: "下厨房", url: "https://www.xiachufang.com", icon: "🍳" },
       { name: "OpenI", url: "https://openi.cn/", icon: "🤖" },
+    ]
+  },
+  {
+    category: "📖 阅读",
+    items: [
+      { name: "科技文章", url: "https://www.bestblogs.dev/feeds?featured=y&time=all&language=all&sort=time_desc", icon: "📑" },
     ]
   },
 ];
 
 // ==================== 以下不用管 ====================
-
-function loadSites() {
-  var s = localStorage.getItem('nav_sites');
-  return s ? JSON.parse(s) : null;
-}
-function saveSites(d) {
-  localStorage.setItem('nav_sites', JSON.stringify(d));
-}
-function getSites() {
-  return loadSites() || JSON.parse(JSON.stringify(SITES));
-}
-
-function render(filter) {
-  filter = filter || '';
-  var data = getSites();
-  var container = document.getElementById('container');
-  container.innerHTML = '';
-  var lf = filter.toLowerCase();
-
-  data.forEach(function(cat, ci) {
-    var filtered = cat.items.filter(function(i) {
-      return !lf || i.name.toLowerCase().indexOf(lf) >= 0 || i.url.toLowerCase().indexOf(lf) >= 0;
+function loadSites(){var s=localStorage.getItem('nav_sites');return s?JSON.parse(s):null}
+function saveSites(d){localStorage.setItem('nav_sites',JSON.stringify(d))}
+function getSites(){return loadSites()||JSON.parse(JSON.stringify(SITES))}
+function render(filter){
+  filter=filter||'';var data=getSites();var c=document.getElementById('container');c.innerHTML='';var lf=filter.toLowerCase();
+  data.forEach(function(cat,ci){
+    var f=cat.items.filter(function(i){return!lf||i.name.toLowerCase().indexOf(lf)>=0||i.url.toLowerCase().indexOf(lf)>=0;});
+    if(lf&&f.length===0)return;
+    var s=document.createElement('div');s.className='category';s.innerHTML='<h2>'+cat.category+'</h2>';
+    var g=document.createElement('div');g.className='grid';
+    f.forEach(function(item){
+      var oi=cat.items.indexOf(item);var w=document.createElement('div');w.className='card-wrap';
+      var a=document.createElement('a');a.className='card';a.href=item.url;a.target='_blank';a.rel='noopener';
+      a.innerHTML='<div class="icon">'+(item.icon||'🔗')+'</div><div class="info"><div class="name">'+item.name+'</div><div class="desc">'+item.url.replace(/^https?:\/\//,'').split('/')[0]+'</div></div>';
+      var d=document.createElement('button');d.className='del-btn';d.textContent='×';
+      d.onclick=(function(idx){return function(e){e.preventDefault();e.stopPropagation();if(confirm('删除「'+item.name+'」？')){cat.items.splice(idx,1);saveSites(data);render(document.getElementById('searchInput').value);}};})(oi);
+      w.appendChild(a);w.appendChild(d);g.appendChild(w);
     });
-    if (lf && filtered.length === 0) return;
-
-    var section = document.createElement('div');
-    section.className = 'category';
-    section.innerHTML = '<h2>' + cat.category + '</h2>';
-    var grid = document.createElement('div');
-    grid.className = 'grid';
-
-    filtered.forEach(function(item) {
-      var origIdx = cat.items.indexOf(item);
-      var wrap = document.createElement('div');
-      wrap.className = 'card-wrap';
-
-      var card = document.createElement('a');
-      card.className = 'card';
-      card.href = item.url;
-      card.target = '_blank';
-      card.rel = 'noopener';
-      card.innerHTML =
-        '<div class="icon">' + (item.icon || '🔗') + '</div>' +
-        '<div class="info">' +
-        '<div class="name">' + item.name + '</div>' +
-        '<div class="desc">' + item.url.replace(/^https?:\/\//, '').split('/')[0] + '</div>' +
-        '</div>';
-
-      var del = document.createElement('button');
-      del.className = 'del-btn';
-      del.textContent = '×';
-      del.onclick = (function(idx) {
-        return function(e) {
-          e.preventDefault(); e.stopPropagation();
-          if (confirm('删除「' + item.name + '」？')) {
-            cat.items.splice(idx, 1);
-            saveSites(data);
-            render(document.getElementById('searchInput').value);
-          }
-        };
-      })(origIdx);
-
-      wrap.appendChild(card);
-      wrap.appendChild(del);
-      grid.appendChild(wrap);
-    });
-
-    var addBtn = document.createElement('div');
-    addBtn.className = 'add-btn';
-    addBtn.textContent = '＋ 添加';
-    addBtn.onclick = (function(idx) { return function() { openModal(idx); }; })(ci);
-    grid.appendChild(addBtn);
-
-    section.appendChild(grid);
-    container.appendChild(section);
+    var ab=document.createElement('div');ab.className='add-btn';ab.textContent='＋ 添加';ab.onclick=(function(idx){return function(){openModal(idx);};})(ci);
+    g.appendChild(ab);s.appendChild(g);c.appendChild(s);
   });
 }
-
-function openModal(ci) {
-  var data = getSites();
-  var sel = document.getElementById('inputCategory');
-  sel.innerHTML = data.map(function(c, i) {
-    return '<option value="' + i + '"' + (i === ci ? ' selected' : '') + '>' + c.category + '</option>';
-  }).join('');
-  document.getElementById('inputName').value = '';
-  document.getElementById('inputUrl').value = '';
-  document.getElementById('inputIcon').value = '';
-  document.getElementById('addModal').classList.add('active');
-  document.getElementById('inputName').focus();
+function openModal(ci){
+  var data=getSites();document.getElementById('inputCategory').innerHTML=data.map(function(c,i){return'<option value="'+i+'"'+(i===ci?' selected':'')+'>'+c.category+'</option>';}).join('');
+  document.getElementById('inputName').value='';document.getElementById('inputUrl').value='';document.getElementById('inputIcon').value='';
+  document.getElementById('addModal').classList.add('active');document.getElementById('inputName').focus();
 }
-function closeModal() {
-  document.getElementById('addModal').classList.remove('active');
+function closeModal(){document.getElementById('addModal').classList.remove('active')}
+function addSite(){
+  var n=document.getElementById('inputName').value.trim(),u=document.getElementById('inputUrl').value.trim(),ci=parseInt(document.getElementById('inputCategory').value),ic=document.getElementById('inputIcon').value.trim()||'🔗';
+  if(!n||!u){alert('请填写名称和网址');return}if(u.indexOf('http')!==0)u='https://'+u;
+  var d=getSites();d[ci].items.push({name:n,url:u,icon:ic});saveSites(d);closeModal();render(document.getElementById('searchInput').value);
 }
-function addSite() {
-  var name = document.getElementById('inputName').value.trim();
-  var url = document.getElementById('inputUrl').value.trim();
-  var ci = parseInt(document.getElementById('inputCategory').value);
-  var icon = document.getElementById('inputIcon').value.trim() || '🔗';
-  if (!name || !url) { alert('请填写名称和网址'); return; }
-  if (url.indexOf('http') !== 0) url = 'https://' + url;
-  var data = getSites();
-  data[ci].items.push({ name: name, url: url, icon: icon });
-  saveSites(data);
-  closeModal();
-  render(document.getElementById('searchInput').value);
-}
-function filterSites(v) { render(v); }
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
-  if (e.key === 'Enter' && document.getElementById('addModal').classList.contains('active')) addSite();
-});
-document.getElementById('addModal').addEventListener('click', function(e) {
-  if (e.target === e.currentTarget) closeModal();
-});
-
+function filterSites(v){render(v)}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();if(e.key==='Enter'&&document.getElementById('addModal').classList.contains('active'))addSite()});
+document.getElementById('addModal').addEventListener('click',function(e){if(e.target===e.currentTarget)closeModal()});
 render();
 </script>
 </body>
