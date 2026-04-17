@@ -41,6 +41,14 @@ header p { font-size: 14px; color: #888; }
 .btn-secondary:hover { background: #e0e0e0; }
 .del-btn { display: none; position: absolute; top: 4px; right: 4px; width: 20px; height: 20px; border-radius: 50%; background: #ff4d4f; color: #fff; border: none; font-size: 12px; cursor: pointer; line-height: 20px; text-align: center; }
 .card-wrap:hover .del-btn { display: block; }
+.goal-section { margin-top: 40px; padding: 24px; background: #fff; border-radius: 12px; border: 1px solid #eee; }
+.goal-section h2 { font-size: 16px; font-weight: 600; color: #555; margin-bottom: 16px; text-align: center; }
+.goal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.goal-card { padding: 20px; border-radius: 10px; text-align: center; }
+.goal-card.learn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; }
+.goal-card.exercise { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: #fff; }
+.goal-card h3 { font-size: 20px; margin-bottom: 4px; }
+.goal-card p { font-size: 13px; opacity: .85; }
 </style>
 </head>
 <body>
@@ -50,6 +58,16 @@ header p { font-size: 14px; color: #888; }
   <div class="search-box"><input type="text" id="searchInput" placeholder="搜索网站..." oninput="filterSites(this.value)"></div>
 </header>
 <div id="container"></div>
+
+<!-- 学习与锻炼 -->
+<div class="goal-section">
+  <h2>🎯 每日目标</h2>
+  <div class="goal-grid">
+    <div class="goal-card learn"><h3>📚 学习</h3><p>每天进步一点点</p></div>
+    <div class="goal-card exercise"><h3>💪 锻炼</h3><p>身体是革命的本钱</p></div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="addModal">
   <div class="modal">
     <h3>➕ 添加网址</h3>
@@ -75,6 +93,7 @@ const SITES = [
       { name: "isflac", url: "https://www.isflac.com/", icon: "💿" },
       { name: "歌曲宝", url: "https://www.gequbao.com/", icon: "🎧" },
       { name: "MusicFree", url: "https://github.com/maotoumao/MusicFree", icon: "📱" },
+      { name: "MusicFree插件", url: "musicfree/musicfree-plugins.zip", icon: "🔌" },
       { name: "lxmusic", url: "https://github.com/guoyue2010/lxmusic-/releases", icon: "📻" },
     ]
   },
@@ -136,26 +155,6 @@ const SITES = [
     ]
   },
   {
-    category: "🔍 搜索",
-    items: [
-      { name: "小爆虾", url: "https://xiaobaoxia.com/file.html", icon: "🦐" },
-      { name: "老王磁力", url: "https://laowanggb.top/", icon: "🧲" },
-      { name: "虫虫搜索", url: "https://search.chongbuluo.com/", icon: "🐛" },
-      { name: "TorrentBay", url: "https://torrentbay.st/", icon: "🌊" },
-      { name: "BT4G", url: "https://bt4gprx.com/", icon: "🔎" },
-      { name: "Ciliduo", url: "https://ciliduo.org/", icon: "🔍" },
-      { name: "云盘资源", url: "https://www.yunpanziyuan.xyz/", icon: "☁️" },
-      { name: "磁力管家", url: "https://wwp.lanzoul.com/b05mjysod", icon: "🧲" },
-      { name: "磁力导航", url: "https://www.uucili.com/", icon: "🧭" },
-      { name: "BTDig", url: "https://btdig.com/", icon: "⛏️" },
-      { name: "qBittorrent", url: "https://www.qbittorrent.org/", icon: "⬇️" },
-      { name: "Trackers", url: "https://github.com/ngosang/trackerslist?tab=readme-ov-file", icon: "📋" },
-      { name: "老司机", url: "https://www.giffox.com/", icon: "🚗" },
-      { name: "搜图", url: "https://www.91sotu.com/", icon: "🖼️" },
-      { name: "小虎队", url: "https://www.bxhd.cn/", icon: "🐯" },
-    ]
-  },
-  {
     category: "🤖 AI",
     items: [
       { name: "OpenI", url: "https://openi.cn/", icon: "🤖" },
@@ -167,9 +166,34 @@ const SITES = [
       { name: "科技文章", url: "https://www.bestblogs.dev/feeds?featured=y&time=all&language=all&sort=time_desc", icon: "📑" },
     ]
   },
+  {
+    category: "🔍 搜索",
+    items: [
+      { name: "小爆虾", url: "https://xiaobaoxia.com/file.html", icon: "🦐" },
+      { name: "老王磁力", url: "https://laowanggb.top/", icon: "🧲" },
+      { name: "虫虫搜索", url: "https://search.chongbuluo.com/", icon: "🐛" },
+      { name: "TorrentBay", url: "https://torrentbay.st/", icon: "🌊" },
+      { name: "Heimaai", url: "https://heimaai.top/", icon: "🔍" },
+      { name: "BT4G", url: "https://bt4gprx.com/", icon: "🔎" },
+      { name: "Ciliduo", url: "https://ciliduo.org/", icon: "🔍" },
+      { name: "云盘资源", url: "https://www.yunpanziyuan.xyz/", icon: "☁️" },
+      { name: "磁力管家", url: "https://wwp.lanzoul.com/b05mjysod", icon: "🧲" },
+      { name: "磁力导航", url: "https://www.uucili.com/", icon: "🧭" },
+      { name: "BTDig", url: "https://btdig.com/", icon: "⛏️" },
+      { name: "qBittorrent", url: "https://www.qbittorrent.org/", icon: "⬇️" },
+      { name: "Trackers", url: "https://github.com/ngosang/trackerslist?tab=readme-ov-file", icon: "📋" },
+      { name: "老司机", url: "https://www.giffox.com/", icon: "🚗" },
+      { name: "搜图", url: "https://www.91sotu.com/", icon: "🖼️" },
+    ]
+  },
+  {
+    category: "🆓 Free Sites",
+    items: [
+      { name: "小虎队", url: "https://www.bxhd.cn/", icon: "🐯" },
+    ]
+  },
 ];
 
-// ==================== 以下不用管 ====================
 function loadSites(){var s=localStorage.getItem('nav_sites');return s?JSON.parse(s):null}
 function saveSites(d){localStorage.setItem('nav_sites',JSON.stringify(d))}
 function getSites(){return loadSites()||JSON.parse(JSON.stringify(SITES))}
